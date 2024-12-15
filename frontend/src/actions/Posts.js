@@ -1,0 +1,33 @@
+import * as api from '../api';
+
+//Action Creators - Functions that return actions
+// const getPosts = () => async (dispatch) => {
+//     try{
+//         const {data} = await api.fetchPosts();
+//     } catch (error){
+
+//     }
+
+//     const action = {type: 'FETCH_ALL', payload: []}
+
+//     // return action;
+//     dispatch(action);
+// }
+
+export const getPosts = () => async (dispatch) => {
+    try{
+        const {data} = await api.fetchPosts();
+        dispatch({type: 'FETCH_ALL', payload: data});
+    } catch (error){
+        console.log(error.message);
+    }
+}
+
+export const createPost = (post) => async (dispatch) => {
+    try{
+        const {data} = await api.createPost(post);
+        dispatch({type: 'CREATE', payload: data})
+    } catch(error){
+        console.log(error.message);
+    }
+}
