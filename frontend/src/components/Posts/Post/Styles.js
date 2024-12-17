@@ -11,7 +11,7 @@ export default makeStyles({
     border: 'solid',
   },
   fullHeightCard: {
-    height: '100%',
+    height: '100%', 
   },
   card: {
     display: 'flex',
