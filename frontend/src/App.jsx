@@ -11,7 +11,7 @@ import {
 import { StyledEngineProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid2'; // Correct import for Grid2
 import { useDispatch } from 'react-redux';
-import { getPosts } from '../actions/posts';
+import { getPosts } from './actions/Posts';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './Styles';
