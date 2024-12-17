@@ -12,12 +12,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle
-} from "@material-ui/core";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+} from "@mui/material";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
-import { deletePost, likePost } from "../../../actions/Posts";
+import { deletePost, likePost } from "../../../actions/posts";
 import { useDispatch } from "react-redux";
 
 const Post = ({ post, setCurrentId }) => {

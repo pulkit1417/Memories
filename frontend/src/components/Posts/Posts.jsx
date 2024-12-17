@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
-import { Grid, CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 
 import Post from './Post/Post'
 import useStyles from './styles';
@@ -9,7 +10,6 @@ const Posts = ({setCurrentId}) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts); //how do we know that these are posts - these are being returned from the reducers in index.js
 
-  console.log(posts);
   return (
     !posts.length ? <CircularProgress /> : (
       <Grid className={classes.container} container alignItems="stretch" spacing={3}>
