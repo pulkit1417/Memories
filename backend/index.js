@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 
 //Routes
-app.use('/api/posts', postsRoutes);
+app.use('/posts', postsRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
