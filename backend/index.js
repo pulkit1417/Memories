@@ -15,8 +15,11 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 
 //Routes
-app.use('/posts', postsRoutes);
+app.use('/api/posts', postsRoutes);
 
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
