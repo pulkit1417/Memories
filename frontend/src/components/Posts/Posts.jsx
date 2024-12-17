@@ -3,7 +3,7 @@ import { CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
 import Post from './Post/Post'
-import useStyles from './styles';
+import useStyles from './Styles';
   
 
 const Posts = ({setCurrentId}) => {

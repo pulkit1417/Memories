@@ -17,7 +17,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
-import { deletePost, likePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/Posts";
 import { useDispatch } from "react-redux";
 
 const Post = ({ post, setCurrentId }) => {
