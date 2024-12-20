@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import useStyles from "./Styles";
 import {
   Card,
@@ -11,7 +11,9 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -23,6 +25,8 @@ import { useDispatch } from "react-redux";
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -46,11 +50,20 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <>
-      <Card className={classes.card}>
+      <Card 
+        className={classes.card} 
+        style={{
+          height: isMobile ? 'auto' : '100%',
+          maxHeight: isMobile ? '300px' : 'unset'
+        }}
+      >
         <CardMedia
           className={classes.media}
           image={post.selectedFile}
           title={post.title}
+          style={{
+            paddingTop: isMobile ? '56.25%' : '75%'
+          }}
         />
         <div className={classes.overlay}>
           <Typography variant="h6">{post.creator}</Typography>

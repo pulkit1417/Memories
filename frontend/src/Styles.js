@@ -11,9 +11,16 @@ const useStyles = makeStyles((theme) => ({
     },
     heading: {
         color: 'rgba(0,183,255, 1)',
+        [theme.breakpoints?.down?.('sm')]: {
+            fontSize: '2rem',
+        },
     },
     image: {
         marginLeft: '15px',
+        [theme.breakpoints?.down?.('sm')]: {
+            height: '40px',
+            width: '40px',
+        },
     },
     mainContainer: {
         // Use optional chaining to safely access breakpoints

@@ -1,17 +1,20 @@
 import { makeStyles } from '@mui/styles';
 
-export default makeStyles({
+const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
-    paddingTop: '56.25%',
+    paddingTop: '75%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     backgroundBlendMode: 'darken',
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '56.25%',
+    },
   },
   border: {
     border: 'solid',
   },
   fullHeightCard: {
-    height: '100%', 
+    height: '100%',
   },
   card: {
     display: 'flex',
@@ -20,6 +23,14 @@ export default makeStyles({
     borderRadius: '15px',
     height: '100%',
     position: 'relative',
+    width:'20rem',
+    
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto',
+      minHeight: '400px',
+      marginLeft:'0.5rem',
+      marginBottom:'0.5rem',
+    },
   },
   overlay: {
     position: 'absolute',
@@ -49,4 +60,6 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
-});
+}));
+
+export default useStyles;

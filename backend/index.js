@@ -5,6 +5,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 import postsRoutes from './routes/posts.js';
+import userRoutes from './routes/user.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 //Routes
 app.use('/posts', postsRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
