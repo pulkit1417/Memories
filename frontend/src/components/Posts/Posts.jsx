@@ -9,7 +9,8 @@ import useStyles from './Styles';
 const Posts = ({setCurrentId}) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts); //how do we know that these are posts - these are being returned from the reducers in index.js
-
+  const user = JSON.parse(localStorage.getItem('profile'));
+  
   return (
     !posts.length ? <CircularProgress /> : (
       <Grid className={classes.container} container alignItems="stretch" spacing={3}>

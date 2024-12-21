@@ -43,22 +43,6 @@ export default makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
-  googleButton: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(1.5),
-    color: theme.palette.text.primary,
-    border: `1px solid ${theme.palette.grey[300]}`,
-    borderRadius: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '&:hover': {
-      backgroundColor: theme.palette.grey[50],
-    },
-    '& .MuiButton-startIcon': {
-      marginRight: theme.spacing(1),
-    },
-  },
   link: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
@@ -81,9 +65,6 @@ export default makeStyles((theme) => ({
       padding: theme.spacing(2),
     },
     submit: {
-      padding: theme.spacing(1),
-    },
-    googleButton: {
       padding: theme.spacing(1),
     },
   },

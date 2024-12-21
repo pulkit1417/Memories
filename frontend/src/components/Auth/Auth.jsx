@@ -1,4 +1,4 @@
-import { useState, useNavigate } from 'react';
+import { useState } from 'react';
 import { 
   Lock, 
   Mail, 
@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import {signin , signup} from '../../actions/Auth'
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   firstName: "",
@@ -86,17 +87,15 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-  };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    if(isSignUp){
+    if (isSignUp) {
       dispatch(signup(formData, navigate));
-    } else{
+    } else {
       dispatch(signin(formData, navigate));
     }
   };
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);

@@ -13,9 +13,10 @@ import {
   DialogContentText,
   DialogTitle,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
@@ -26,9 +27,37 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find((like) => like === user?.result?._id) ? (
+        <>
+          <ThumbUpAltIcon fontSize="small" />
+          &nbsp;
+          {post.likes.length > 2
+            ? `You and ${post.likes.length - 1} others`
+            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize="small" />
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+        </>
+      );
+    }
+
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize="small" />
+        &nbsp;Like
+      </>
+    );
+  };
 
   // Open delete confirmation dialog
   const handleOpenDeleteDialog = () => {
@@ -50,11 +79,11 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <>
-      <Card 
-        className={classes.card} 
+      <Card
+        className={classes.card}
         style={{
-          height: isMobile ? 'auto' : '100%',
-          maxHeight: isMobile ? '300px' : 'unset'
+          height: isMobile ? "auto" : "100%",
+          maxHeight: isMobile ? "300px" : "unset",
         }}
       >
         <CardMedia
@@ -62,24 +91,26 @@ const Post = ({ post, setCurrentId }) => {
           image={post.selectedFile}
           title={post.title}
           style={{
-            paddingTop: isMobile ? '56.25%' : '75%'
+            paddingTop: isMobile ? "56.25%" : "75%",
           }}
         />
         <div className={classes.overlay}>
-          <Typography variant="h6">{post.creator}</Typography>
+          <Typography variant="h6">{post.name}</Typography>
           <Typography variant="body2">
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
-        <div className={classes.overlay2}>
-          <Button
-            style={{ color: "white" }}
-            size="small"
-            onClick={() => setCurrentId(post._id)}
-          >
-            <MoreHorizIcon fontSize="medium" />
-          </Button>
-        </div>
+        {user?.result?._id === post?.creator && (
+          <div className={classes.overlay2}>
+            <Button
+              onClick={() => setCurrentId(post._id)}
+              style={{ color: "white" }}
+              size="small"
+            >
+              <MoreHorizIcon fontSize="medium" />
+            </Button>
+          </div>
+        )}
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary">
             {post.tags.map((tag) => `#${tag} `)}
@@ -94,23 +125,29 @@ const Post = ({ post, setCurrentId }) => {
           {post.title}
         </Typography>
         <CardContent>
-          <Typography color="textSecondary" variant="body2" component="p" >
+          <Typography color="textSecondary" variant="body2" component="p">
             {post.message}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary" onClick={() => {dispatch(likePost(post._id))}}>
-            <ThumbUpAltIcon fontSize="small" />
-            &nbsp; Like &nbsp;{post.likeCount}
-          </Button>
           <Button
             size="small"
             color="primary"
-            onClick={handleOpenDeleteDialog}
+            disabled={!user?.result}
+            onClick={() => dispatch(likePost(post._id))}
           >
-            <DeleteIcon fontSize="small" />
-            Delete
+            <Likes />
           </Button>
+          {user?.result?._id === post?.creator && (
+            <Button
+              size="small"
+              color="primary"
+              onClick={handleOpenDeleteDialog}
+            >
+              <DeleteIcon fontSize="small" />
+              Delete
+            </Button>
+          )}
         </CardActions>
       </Card>
       <Dialog
@@ -122,19 +159,15 @@ const Post = ({ post, setCurrentId }) => {
         <DialogTitle id="delete-dialog-title">{"Confirm Delete"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="delete-dialog-description">
-            Are you sure you want to delete this post? 
-            This action cannot be undone.
+            Are you sure you want to delete this post? This action cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog} color="primary">
             Cancel
           </Button>
-          <Button 
-            onClick={handleConfirmDelete} 
-            color="secondary" 
-            autoFocus
-          >
+          <Button onClick={handleConfirmDelete} color="secondary" autoFocus>
             Delete
           </Button>
         </DialogActions>

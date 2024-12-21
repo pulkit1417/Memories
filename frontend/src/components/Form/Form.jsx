@@ -8,7 +8,6 @@ import { Button, TextField, Typography } from "@mui/material";
 
 const Form = ({currentId, setCurrentId}) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -17,6 +16,7 @@ const Form = ({currentId, setCurrentId}) => {
   const post = useSelector((state) => currentId ? state.posts.find((post) => post._id === currentId) : null);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if(post) setPostData(post);
@@ -24,17 +24,27 @@ const Form = ({currentId, setCurrentId}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(currentId){
-      dispatch(updatePost( currentId, postData));
+    if(currentId === 0){
+      dispatch(updatePost(currentId, ));
     } else{
-      dispatch(createPost(postData));
+      dispatch(createPost({...postData, name: user?.result?.name, creator: user?.result?._id}));
     }
     clear();
   };
   const clear = () => {
-    setCurrentId(null);
-    setPostData({ creator: "", title: "", message: "", tags: "", selectedFile: "" });
+    setCurrentId(0);
+    setPostData({ title: "", message: "", tags: "", selectedFile: "" });
   };
+
+  if(!user?.result?.name){
+    return(
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align='center'>
+          Please Sign In to create your own memories and like other's memories.
+        </Typography>
+      </Paper>
+    )
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -44,20 +54,6 @@ const Form = ({currentId, setCurrentId}) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6"> {currentId ? "Editing" : "Creating"} a Memory</Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator} 
-          //postData - whole data from post is going to be stored in the postData object
-          // creator - and each object key is going to be the specific text field
-
-          // onChange={(e) => setPostData({ creator : e.target.value })}
-          //if we do it like this then we would only get the creator and not the other fields
-          //so we need to spread the postData object and then update the creator
-          onChange={(e) => setPostData({ ...postData,creator : e.target.value })}
-        />
         <TextField
           name="title"
           variant="outlined"
