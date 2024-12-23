@@ -33,7 +33,7 @@ export function App() {
                 <Route path='/posts' exact element={<Home />} />
                 <Route path='/posts/search' exact element={<Home />} />
                 <Route path='/posts/:id' exact element={<PostDetails />} />
-                <Route path='/auth'  exact element={!user ? <Auth /> : <Navigate to="/posts" replace />} />
+                <Route path='/auth' exact element={!user ? <Auth /> : <Navigate to="/posts" replace />} />
             </Routes>
           </Container>
         </Router>
