@@ -9,13 +9,12 @@ import useStyles from './Styles';
 const Posts = ({setCurrentId}) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts); //how do we know that these are posts - these are being returned from the reducers in index.js
-  const user = JSON.parse(localStorage.getItem('profile'));
   
   return (
     !posts.length ? <CircularProgress /> : (
       <Grid className={classes.container} container alignItems="stretch" spacing={3}>
         {posts.map((post) => (
-          <Grid key={post._id} item xs={12} sm={6} md={6}>
+          <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
             <Post post={post} setCurrentId={setCurrentId} />
           </Grid>
         ))}

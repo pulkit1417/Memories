@@ -1,10 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Container, ThemeProvider, createTheme } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth"
+import PostDetails from "./components/PostDetails/PostDetails";
 
 // Create a theme with breakpoints
 const theme = createTheme({
@@ -20,15 +21,19 @@ const theme = createTheme({
 });
 
 export function App() {
+  const user = JSON.parse(localStorage.getItem('profile'));
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Router>
-          <Container maxWidth="lg">
+          <Container maxWidth="xl">
             <Navbar />
             <Routes >
-                <Route path='/'  exact element={<Home />} />
-                <Route path='/auth'  exact element={<Auth />} />
+            <Route path="/" element={<Navigate to="/posts" replace />} />
+                <Route path='/posts' exact element={<Home />} />
+                <Route path='/posts/search' exact element={<Home />} />
+                <Route path='/posts/:id' exact element={<PostDetails />} />
+                <Route path='/auth'  exact element={!user ? <Auth /> : <Navigate to="/posts" replace />} />
             </Routes>
           </Container>
         </Router>

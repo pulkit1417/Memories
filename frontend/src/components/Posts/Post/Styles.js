@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '15px',
     height: '100%',
     position: 'relative',
-    width:'20rem',
+    width:'18rem',
     
     [theme.breakpoints.down('sm')]: {
       height: 'auto',

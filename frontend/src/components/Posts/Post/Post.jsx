@@ -85,6 +85,7 @@ const Post = ({ post, setCurrentId }) => {
           height: isMobile ? "auto" : "100%",
           maxHeight: isMobile ? "300px" : "unset",
         }}
+        elevation={6}
       >
         <CardMedia
           className={classes.media}

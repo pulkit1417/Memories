@@ -17,6 +17,7 @@ export default makeStyles((theme) => ({
     color: theme.palette.primary.main,
     textDecoration: 'none',
     fontSize: '3rem',
+    fontWeight: '500',
     [theme.breakpoints.down('sm')]: {
       fontSize: '2rem',
     },

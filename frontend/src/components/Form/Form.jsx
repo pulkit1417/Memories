@@ -164,12 +164,13 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} >
       <form
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
+        elevation={6}
       >
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a Memory
