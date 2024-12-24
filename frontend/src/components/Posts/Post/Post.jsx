@@ -14,6 +14,7 @@ import {
   DialogTitle,
   useMediaQuery,
   useTheme,
+  ButtonBase
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
@@ -22,12 +23,14 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { deletePost, likePost } from "../../../actions/Posts";
 import { useDispatch } from "react-redux";
+import {Link, useNavigate} from 'react-router-dom'
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -75,6 +78,10 @@ const Post = ({ post, setCurrentId }) => {
     handleCloseDeleteDialog();
   };
 
+  const openPost = () => {
+    navigate(`/posts/${post._id}`) 
+  }
+
   useEffect(() => {}, [post]);
 
   return (
@@ -87,6 +94,7 @@ const Post = ({ post, setCurrentId }) => {
         }}
         elevation={6}
       >
+        <Link to={`/posts/${post._id}`} >
         <CardMedia
           className={classes.media}
           image={post.selectedFile}
@@ -130,6 +138,7 @@ const Post = ({ post, setCurrentId }) => {
             {post.message}
           </Typography>
         </CardContent>
+        </Link>
         <CardActions className={classes.cardActions}>
           <Button
             size="small"

@@ -5,6 +5,7 @@ import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/Posts";
 import { Button, TextField, Typography, Alert, CircularProgress } from "@mui/material";
+import { useNavigate  } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
@@ -21,7 +22,7 @@ const Form = ({ currentId, setCurrentId }) => {
     tags: "",
     selectedFile: "",
   });
-  
+  const navigate = useNavigate();
   // Loading state for submission
   const [isSubmitting, setIsSubmitting] = useState(false);
   // General form error state
@@ -111,7 +112,7 @@ const Form = ({ currentId, setCurrentId }) => {
           ...postData, 
           name: user?.result?.name,
           creator: user?.result?._id 
-        }));
+        }, navigate));
         setSuccessMessage("Post created successfully!");
       }
       clear();

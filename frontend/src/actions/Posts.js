@@ -1,5 +1,5 @@
 import * as api from '../api/index';
-import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_POST, FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
 //Action Creators - Functions that return actions
 // const getPosts = () => async (dispatch) => {
 //     try{
@@ -13,6 +13,17 @@ import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE } from '../constants
 //     // return action;
 //     dispatch(action);
 // }
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+
+    const { data } = await api.fetchPost(id);
+
+    dispatch({ type: FETCH_POST, payload: { post: data } });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getPosts = () => async (dispatch) => {
     try{
@@ -35,9 +46,10 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     }
 }
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, navigate) => async (dispatch) => {
     try{
         const {data} = await api.createPost(post);
+        navigate(`/posts/${data._id}`);
         dispatch({type: CREATE, payload: data})
     } catch(error){
         console.log(error.message);

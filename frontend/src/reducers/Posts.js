@@ -9,25 +9,40 @@
 //     }
 // }
 
-import { FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_BY_SEARCH } from "../constants/actionTypes";
+import { FETCH_POST, FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_BY_SEARCH, LIKE } from "../constants/actionTypes";
 
-export default (posts = [], action) => {
+const postsReducer = (posts = [], action) => {
   switch (action.type) {
+    case FETCH_POST:
+      // Return a specific post
+      return action.payload;
+
     case FETCH_ALL:
-      return action.payload; //Our actual posts
+      // Return all posts from the server
+      return action.payload;
+
     case FETCH_BY_SEARCH:
-       return action.payload;
+      // Return posts matching search criteria
+      return action.payload;
+
     case CREATE:
+      // Add a new post to the state
       return [...posts, action.payload];
+
     case UPDATE:
+    case LIKE:
+      // Update a specific post
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
-    // post.map returns array
-    // for each post we check if the post id is equal to the action.payload id and update it from the action.payload because it is now the updated post and if it is not equal to the action.payload id then we return the post as it is
-    case DELETE:  
+
+    case DELETE:
+      // Remove a specific post by ID
       return posts.filter((post) => post._id !== action.payload);
+
     default:
       return posts;
   }
 };
+
+export default postsReducer;
