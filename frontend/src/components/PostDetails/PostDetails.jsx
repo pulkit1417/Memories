@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 
+import CommentSection from './CommentSection';
+
 import { getPost } from '../../actions/Posts';
 import useStyles from './Styles';
 
@@ -33,7 +35,7 @@ const Post = () => {
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>

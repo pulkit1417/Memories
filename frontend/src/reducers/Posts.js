@@ -35,7 +35,7 @@ const postsReducer = (posts = [], action) => {
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
-
+      
     case DELETE:
       // Remove a specific post by ID
       return posts.filter((post) => post._id !== action.payload);
