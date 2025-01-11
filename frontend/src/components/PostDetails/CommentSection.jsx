@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import {useDispatch} from 'react-redux';
-import { commentPost } from "../../actions/posts";
+import { commentPost } from "../../actions/Posts";
 import { Typography, TextField, Button, Paper } from "@mui/material";
 import useStyles from './Styles';
 
